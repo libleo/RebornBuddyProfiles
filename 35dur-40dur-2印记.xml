@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Profile>
+    <Name>35Dur or 40Dur 2x NameAndBrand</Name>
+    <KillRadius>50</KillRadius>
+    <GrindAreas> 
+    </GrindAreas>
+    <BehaviorDirectory>CustomTags</BehaviorDirectory>
+    <Order>
+        <While Condition="True">
+			<Synthesize RecipeId="2656" RequiredSkills="281,285,286,100009,100069"  />
+			<While Condition="CraftingManager.IsCrafting">
+				<CraftActionByName Name="Comfort Zone" />	
+				<RunCode Name="UseTrick"/>
+                        	<CraftActionByName Name="Inner Quiet" />
+                                <RunCode Name="UseTrick"/>
+                                <CraftActionByName Name="Steady Hand II" />
+                                <RunCode Name="UseTrick"/>                                
+                        	<CraftActionByName Name="Waste Not II" />
+    				<RunCode Name="UseBestTouch"/>
+				<RunCode Name="UseBestTouch"/>
+				<RunCode Name="UseBestTouch"/>
+                                <RunCode Name="UseBestTouch"/>
+                                <RunCode Name="UseTrick"/>                                
+                                <CraftActionByName Name="Master's Mend" />
+                                <RunCode Name="UseTrick"/>
+                                <CraftActionByName Name="Steady Hand II" />
+                                <RunCode Name="UseBestTouch"/>
+				<RunCode Name="UseBestTouch"/>
+				<RunCode Name="UseBestTouch"/>                                
+				<If Condition="CraftingManager.Condition == CraftingCondition.Excellent">
+                                        <CraftActionByName Name="Byregot's Blessing" />
+                                        <RunCode Name="NameAndBrand"/>
+                                </If>
+                                <CraftActionByName Name="Great Strides" />
+				<CraftActionByName Name="Ingenuity II" />
+                                <CraftActionByName Name="Steady Hand" />
+                                <CraftActionByName Name="Byregot's Blessing" />
+                                <RunCode Name="NameAndBrand"/>
+                            </While>
+        </While>
+    </Order>
+	<CodeChunks>
+		<CodeChunk Name="UseBestTouch">
+			<![CDATA[
+				SpellData data;
+				if ((CraftingManager.Condition == CraftingCondition.Good || CraftingManager.Condition == CraftingCondition.Excellent) &&
+					ActionManager.CurrentActions.TryGetValue("Precise Touch", out data) && Actionmanager.CanCast(data, null)) {
+					ActionManager.DoAction("Precise Touch", null);
+				} else {
+					ActionManager.DoAction("Hasty Touch", null);
+				}
+				await Coroutine.Wait(10000, () => CraftingManager.AnimationLocked);
+				await Coroutine.Wait(Timeout.Infinite, () => !CraftingManager.AnimationLocked);
+
+				await Coroutine.Sleep(250);
+			]]>
+		</CodeChunk>
+	</CodeChunks>
+	<CodeChunks>
+		<CodeChunk Name="UseTrick">
+			<![CDATA[
+				if (CraftingManager.Condition == CraftingCondition.Good || CraftingManager.Condition == CraftingCondition.Excellent) {
+					ActionManager.DoAction("Tricks of the Trade", null);
+                                }
+                                await Coroutine.Wait(10000, () => CraftingManager.AnimationLocked);
+				await Coroutine.Wait(Timeout.Infinite, () => !CraftingManager.AnimationLocked);
+
+				await Coroutine.Sleep(200);
+			]]>
+		</CodeChunk>
+        </CodeChunks>
+        <CodeChunks>
+		<CodeChunk Name="NameAndBrand">
+			<![CDATA[
+				ActionManager.DoAction("Name of Earth", null);
+				await Coroutine.Wait(10000, () => CraftingManager.AnimationLocked);
+				await Coroutine.Wait(Timeout.Infinite, () => !CraftingManager.AnimationLocked);
+
+                                await Coroutine.Sleep(200);
+
+                                ActionManager.DoAction("Brand of Earth", null);
+				await Coroutine.Wait(10000, () => CraftingManager.AnimationLocked);
+				await Coroutine.Wait(Timeout.Infinite, () => !CraftingManager.AnimationLocked);
+
+				await Coroutine.Sleep(250);
+
+                                ActionManager.DoAction("Brand of Earth", null);
+				await Coroutine.Wait(10000, () => CraftingManager.AnimationLocked);
+				await Coroutine.Wait(Timeout.Infinite, () => !CraftingManager.AnimationLocked);
+
+				await Coroutine.Sleep(250);
+
+			]]>
+		</CodeChunk>
+	</CodeChunks>
+
+</Profile>
