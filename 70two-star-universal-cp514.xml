@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Profile>
+    <Name>70 ** universal(1330,1220,cp514)</Name>
+    <KillRadius>50</KillRadius>
+    <GrindAreas> 
+    </GrindAreas>
+    <BehaviorDirectory>CustomTags</BehaviorDirectory>
+    <Order>
+        <While Condition="True">
+	    <Synthesize RecipeId="2656" MinimumCp="514" RequiredSkills="281" />
+            <While Condition="CraftingManager.IsCrafting">
+                <CraftActionByName Name="Muscle Memory" />
+		<CraftActionByName Name="Comfort Zone" />	
+                <CraftActionByName Name="Steady Hand II" />
+                <CraftActionByName Name="Piece by Piece" />
+                <RunCode Name="UseBestTouch"/>
+                <RunCode Name="UseBestTouch"/>
+                <RunCode Name="UseBestTouch"/>
+                <RunCode Name="UseBestTouch"/>
+                <RunCode Name="Manipulation II"/>
+                <RunCode Name="Focused Synthesis"/>                
+                <CraftActionByName Name="Comfort Zone" />	
+            	<CraftActionByName Name="Ingenuity" />
+                <CraftActionByName Name="Steady Hand II" />
+                <RunCode Name="UseBestTouch"/>
+                <RunCode Name="UseBestTouch"/>
+                <RunCode Name="UseBestTouch"/>
+                <RunCode Name="UseBestTouch"/>
+                <RunCode Name="UseBestTouch"/>
+                <CraftActionByName Name="Steady Hand" />
+                <CraftActionByName Name="Great Strides" />                
+                <CraftActionByName Name="Innovation" />                
+                <CraftActionByName Name="Ingenuity" />                
+                <CraftActionByName Name="Byregot's Blessing" />                
+                <RunCode Name="Focused Synthesis"/>                
+                <CraftActionByName Name="Careful Synthesis II" />
+                <CraftActionByName Name="Careful Synthesis II" />                        
+            </While>
+        </While>
+    </Order>
+	<CodeChunks>
+		<CodeChunk Name="UseBestTouch">
+			<![CDATA[
+				SpellData data;
+				ActionManager.DoAction("Prudent Touch", null);                                
+				await Coroutine.Wait(10000, () => CraftingManager.AnimationLocked);
+				await Coroutine.Wait(Timeout.Infinite, () => !CraftingManager.AnimationLocked);
+
+				await Coroutine.Sleep(250);
+			]]>
+		</CodeChunk>
+        </CodeChunks>
+        <CodeChunks>
+		<CodeChunk Name="Manipulation II">
+			<![CDATA[
+				SpellData data;
+				ActionManager.DoAction("Manipulation II", null);                                
+				await Coroutine.Wait(10000, () => CraftingManager.AnimationLocked);
+				await Coroutine.Wait(Timeout.Infinite, () => !CraftingManager.AnimationLocked);
+
+				await Coroutine.Sleep(200);
+			]]>
+		</CodeChunk>
+	</CodeChunks>
+	<CodeChunks>
+		<CodeChunk Name="UseTrick">
+			<![CDATA[
+				if (CraftingManager.Condition == CraftingCondition.Good || CraftingManager.Condition == CraftingCondition.Excellent) {
+					ActionManager.DoAction("Tricks of the Trade", null);
+                                }
+                                await Coroutine.Wait(10000, () => CraftingManager.AnimationLocked);
+				await Coroutine.Wait(Timeout.Infinite, () => !CraftingManager.AnimationLocked);
+
+				await Coroutine.Sleep(200);
+			]]>
+		</CodeChunk>
+        </CodeChunks>
+        <CodeChunks>
+		<CodeChunk Name="Focused Synthesis">
+			<![CDATA[
+				ActionManager.DoAction("Observe", null);
+				await Coroutine.Wait(10000, () => CraftingManager.AnimationLocked);
+				await Coroutine.Wait(Timeout.Infinite, () => !CraftingManager.AnimationLocked);
+
+                                await Coroutine.Sleep(200);
+
+                                ActionManager.DoAction("Focused Synthesis", null);
+				await Coroutine.Wait(10000, () => CraftingManager.AnimationLocked);
+				await Coroutine.Wait(Timeout.Infinite, () => !CraftingManager.AnimationLocked);
+
+				await Coroutine.Sleep(250);
+			]]>
+		</CodeChunk>
+	</CodeChunks>
+
+</Profile>
