@@ -15,6 +15,7 @@ def trim_sidequest_dom(file_path):
   print("order node count ", len(order.childNodes))
   for orderChild in order.childNodes:
     if orderChild.nodeType == Node.COMMENT_NODE and orderChild.nodeValue.strip().startswith('Sidequest'):
+      order.removeChild(orderChild)
       mark_delete_next = True
     elif mark_delete_next == True and orderChild.nodeType == Node.ELEMENT_NODE:
       print("remove child ", orderChild, orderChild.nodeType)
